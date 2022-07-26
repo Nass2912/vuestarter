@@ -9,24 +9,27 @@
       <p>{{ fullName() }}</p>
       <a :href="url" target="_blank">Google</a>
       <p v-html="raw_url"></p>
-      <p> {{ age }} </p>
+      <p> {{ typeof age }} </p>
+      <p> {{ lastName }} </p>
 
       <hr/>
 
       <label>First Name</label>
-      <input type="text" v-model="firstName"/>
+      <input type="text" v-model.lazy.trim="firstName"/>
       
+      <label>Middle Name</label>
+      <input type="text" @keyup.enter="updateMiddleName"/>
+
       <label>Last Name</label>
-      <input type="text" :value="lastName" @input="updateLastName"/>
+      <input type="text" :value="lastName" @input.prevent="updateLastName('Event triggered','2nd argument', $event)"/>
+
+      <label>Age</label>
+      <input type="number" v-model.number="age"/>
 
       <button type="button" @click="increment"> + </button>
       <button type="button" @click="age--"> - </button>
     </div>
 
-    <!-- <div id="app1">
-      {{ firstName }}
-      {{ lastName }}
-    </div> -->
     <script src="https://unpkg.com/vue@3"></script>
     <script src="app.js"></script>
   </body>
